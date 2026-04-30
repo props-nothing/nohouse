@@ -1,26 +1,99 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+@theme {
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+
+  --color-cream: #fff8ee;
+  --color-cream-2: #ffeedb;
+  --color-peach: #ffd7b0;
+  --color-rose: #ffb3a7;
+  --color-coral: #8f8d76;
+  --color-ember: #e0533a;
+  --color-ink: #1f1410;
+  --color-ink-soft: #4a3a30;
+  --color-mint: #b8e6c8;
+  --color-sky: #cfe7ff;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+:root {
+  --background: #fff8ee;
+  --foreground: #1f1410;
 }
 
+html,
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+.bg-aurora {
+  background:
+    radial-gradient(60rem 40rem at 10% -10%, #ffd7b0 0%, transparent 60%),
+    radial-gradient(50rem 35rem at 110% 10%, #ffb3a7 0%, transparent 55%),
+    radial-gradient(45rem 35rem at 50% 110%, #ffe7c2 0%, transparent 60%),
+    linear-gradient(180deg, #fff8ee 0%, #ffeedb 100%);
+}
+
+.grain::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.6 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -14px, 0);
+  }
+}
+.float-slow {
+  animation: float-slow 9s ease-in-out infinite;
+}
+
+@keyframes float-slower {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) rotate(0deg);
+  }
+  50% {
+    transform: translate3d(0, -22px, 0) rotate(2deg);
+  }
+}
+.float-slower {
+  animation: float-slower 13s ease-in-out infinite;
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.ticker {
+  animation: ticker 40s linear infinite;
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 122, 89, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 16px rgba(255, 122, 89, 0);
+  }
+}
+.pulse-glow {
+  animation: pulse-glow 2.4s ease-out infinite;
 }
