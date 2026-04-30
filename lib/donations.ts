@@ -107,12 +107,38 @@ export function buildSnapshot(
   };
 }
 
+// ---- Live-source options (researched 2026-04-30) ---------------------------
+// Donations actually flow through donate.gg's on-chain Donation Relay program
+// on Solana: `RLAYHr9TRFcKB2ubYQhspcnXiaGpaVzNQvHytt47RZu`. Every donation is
+// keyed by a 32-byte `config_id` that pins the 5-charity beneficiary list to
+// $nohouse. Three real-time-capable approaches, ranked best → worst:
+//
+// (A) [RECOMMENDED] donate.gg Developer API — `GET /api/v1/configs/{configId}`.
+//     Returns aggregate `stats.usdDonatedE6`, `donationCount`, per-channel
+//     atomic volume, last-donation timestamp. Closed beta: email
+//     support@donate.gg with project description to get an API key. Server-
+//     side only (key must not ship to browser). Cache 60–300s in this route.
+//     Docs: https://docs.donate.gg/developer/donation-configs
+//
+// (B) Solana RPC, no API key. The relay program stores per-(config_id, mint)
+//     running totals in a `debouncer_v1` PDA (seeds: ["debouncer_v1",
+//     config_id, mint]) and emits `DonationMadeV1Event` on every donation.
+//     Read the PDA with @solana/web3.js + the on-chain IDL:
+//       https://explorer.solana.com/address/RLAYHr9TRFcKB2ubYQhspcnXiaGpaVzNQvHytt47RZu/idl
+//     Per-charity split is deterministic from the config weights (20% × 5).
+//     One-time discovery needed: find $nohouse's `config_id` by inspecting any
+//     historical donate-tx instruction data, or `getProgramAccounts` filtered
+//     on the WSOL mint.
+//
+// (C) Manual snapshot (current). Bump the constants below and redeploy.
+//     Zero infra; fine for low-traffic launches.
+//
+// Path (A) is the cleanest swap-in: replace the `buildSnapshot(...)` call
+// below with a fetch to donate.gg, parse `usdDonatedE6` + per-channel SOL
+// volume, and convert once. Path (B) is the fallback if API access is denied.
+// ---------------------------------------------------------------------------
+
 export async function getDonationsSnapshot(): Promise<DonationsSnapshot> {
-  // TODO: Replace with a live source — options:
-  //  1. Server-side scrape pump.fun coin page (Playwright in a cron route).
-  //  2. Solana RPC: sum SOL transfers from the creator-reward wallet to each
-  //     charity wallet and convert to USD via Jupiter/Pyth.
-  //  3. donate.gg webhook → KV store, read here.
   return buildSnapshot(
     SNAPSHOT_DONATED_SOL_PER_CHARITY,
     SNAPSHOT_SOL_PRICE_USD,
