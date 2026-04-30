@@ -5,6 +5,7 @@ import { getDonationsSnapshot } from "@/lib/donations";
 const PUMPFUN_URL =
   "https://pump.fun/coin/4QVHxosURyMsrNGDWBZX6V3nKrRhp5a5uW9vMirjpump";
 const DONATE_GG_URL = "https://www.donate.gg/";
+const X_COMMUNITY_URL = "https://x.com/i/communities/2039477094598492334";
 const TOKEN_MINT = "4QVHxosURyMsrNGDWBZX6V3nKrRhp5a5uW9vMirjpump";
 
 const charities = [
@@ -137,6 +138,16 @@ export default async function Home() {
           >
             Buy $nohouse
           </a>
+          <a
+            href={X_COMMUNITY_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Join the $nohouse community on X"
+            className="group ml-3 inline-flex h-10 items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/70 px-4 text-sm font-semibold text-ink backdrop-blur transition hover:-translate-y-0.5 hover:bg-white"
+          >
+            <XIcon className="h-4 w-4" />
+            <span className="hidden sm:inline">Community</span>
+          </a>
         </header>
 
         {/* Hero */}
@@ -193,6 +204,16 @@ export default async function Home() {
               className="inline-flex items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/70 px-7 py-3.5 text-base font-semibold text-ink backdrop-blur transition hover:-translate-y-0.5 hover:bg-white"
             >
               See the shelters
+            </a>
+            <a
+              href={X_COMMUNITY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group inline-flex items-center justify-center gap-2 rounded-full bg-coral px-7 py-3.5 text-base font-semibold text-ink shadow-lg shadow-coral/30 transition hover:-translate-y-0.5 hover:bg-ember hover:text-cream"
+            >
+              <XIcon className="h-4 w-4" />
+              Join the community
+              <ArrowIcon className="h-4 w-4 transition group-hover:translate-x-0.5" />
             </a>
           </div>
 
@@ -451,6 +472,15 @@ export default async function Home() {
                   >
                     Visit donate.gg
                   </a>
+                  <a
+                    href={X_COMMUNITY_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center justify-center gap-2 rounded-full bg-cream/10 px-7 py-3.5 text-base font-semibold text-cream ring-1 ring-cream/20 transition hover:-translate-y-0.5 hover:bg-cream hover:text-ink"
+                  >
+                    <XIcon className="h-4 w-4" />
+                    Community on X
+                  </a>
                 </div>
               </div>
 
@@ -524,6 +554,15 @@ export default async function Home() {
               >
                 donate.gg
               </a>
+              <a
+                href={X_COMMUNITY_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-ink"
+              >
+                <XIcon className="h-3.5 w-3.5" />
+                Community
+              </a>
               <span>
                 © {new Date().getFullYear()} $nohouse — not financial advice,
                 just kindness.
@@ -545,6 +584,19 @@ function HouseIcon({ className }: { className?: string }) {
         strokeWidth="1.7"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function XIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="currentColor"
+      className={className}
+      aria-hidden
+    >
+      <path d="M18.244 2H21.5l-7.5 8.57L23 22h-6.84l-5.36-6.83L4.6 22H1.34l8.04-9.18L1 2h7.02l4.84 6.23L18.244 2Zm-1.2 18h1.86L7.04 4H5.06l11.984 16Z" />
     </svg>
   );
 }
