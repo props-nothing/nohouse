@@ -74,7 +74,7 @@ export default function LiveDonations({ initial }: Props) {
               <span className="relative inline-flex h-2.5 w-2.5 rounded-full bg-coral" />
             </span>
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-coral">
-              Live donations
+              Live donations (soon: donate.gg API)
             </span>
           </div>
           <h2 className="mt-4 max-w-2xl text-4xl font-semibold leading-tight tracking-tight text-ink sm:text-5xl">
@@ -187,11 +187,6 @@ export default function LiveDonations({ initial }: Props) {
           </li>
         ))}
       </ul>
-
-      <p className="mt-6 text-center text-xs text-ink-soft">
-        Snapshot mirrors pump.fun creator-reward allocations. Verify on-chain
-        via the token mint and any charity wallet.
-      </p>
     </div>
   );
 }

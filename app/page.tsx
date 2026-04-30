@@ -1,3 +1,4 @@
+import Image from "next/image";
 import LiveDonations from "@/components/LiveDonations";
 import { getDonationsSnapshot } from "@/lib/donations";
 
@@ -96,9 +97,16 @@ export default async function Home() {
           >
             <span
               aria-hidden
-              className="grid h-9 w-9 place-items-center rounded-xl bg-ink text-cream shadow-sm"
+              className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-ink text-cream shadow-sm"
             >
-              <HouseIcon className="h-5 w-5" />
+              <Image
+                src="/nohouse.png"
+                alt=""
+                width="36"
+                height="36"
+                className="h-9 w-9 object-cover"
+                priority
+              />
             </span>
             <span className="text-lg">
               <span className="text-coral">$</span>nohouse
@@ -480,8 +488,17 @@ export default async function Home() {
         <footer className="mx-auto w-full max-w-7xl px-6 pb-12 pt-6 sm:px-10">
           <div className="flex flex-col items-start justify-between gap-6 border-t border-ink/10 pt-8 sm:flex-row sm:items-center">
             <div className="flex items-center gap-2 font-semibold tracking-tight">
-              <span className="grid h-8 w-8 place-items-center rounded-lg bg-ink text-cream">
-                <HouseIcon className="h-4 w-4" />
+              <span
+                aria-hidden
+                className="grid h-8 w-8 place-items-center overflow-hidden rounded-lg bg-ink text-cream"
+              >
+                <Image
+                  src="/nohouse.png"
+                  alt=""
+                  width="32"
+                  height="32"
+                  className="h-8 w-8 object-cover"
+                />
               </span>
               <span>
                 <span className="text-coral">$</span>nohouse
