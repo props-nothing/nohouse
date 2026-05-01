@@ -1,11 +1,13 @@
 import Image from "next/image";
 import LiveDonations from "@/components/LiveDonations";
+import MobileNav from "@/components/MobileNav";
 import { getDonationsSnapshot } from "@/lib/donations";
 
 const PUMPFUN_URL =
   "https://pump.fun/coin/4QVHxosURyMsrNGDWBZX6V3nKrRhp5a5uW9vMirjpump";
 const DONATE_GG_URL = "https://www.donate.gg/";
-const X_COMMUNITY_URL = "https://x.com/i/communities/2039477094598492334";
+const X_COMMUNITY_URL = "https://x.com/i/communities/1954603057460723878";
+const X_ACCOUNT_URL = "https://x.com/nohousecoin";
 const TOKEN_MINT = "4QVHxosURyMsrNGDWBZX6V3nKrRhp5a5uW9vMirjpump";
 
 const charities = [
@@ -91,63 +93,81 @@ export default async function Home() {
 
       <div className="relative z-10">
         {/* Nav */}
-        <header className="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-6 sm:px-10">
-          <a
-            href="#top"
-            className="flex items-center gap-2 font-semibold tracking-tight"
-          >
-            <span
-              aria-hidden
-              className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-ink text-cream shadow-sm"
+        <header className="mx-auto flex w-full max-w-7xl items-center justify-between gap-6 px-6 py-6 sm:px-10">
+          <div className="flex items-center gap-8">
+            <a
+              href="#top"
+              className="flex items-center gap-2 font-semibold tracking-tight"
             >
-              <Image
-                src="/nohouse.png"
-                alt=""
-                width="36"
-                height="36"
-                className="h-9 w-9 object-cover"
-                priority
-              />
-            </span>
-            <span className="text-lg">
-              <span className="text-coral">$</span>nohouse
-            </span>
-          </a>
-          <nav className="hidden items-center gap-8 text-sm font-medium text-ink-soft md:flex">
-            <a href="#mission" className="hover:text-ink">
-              Mission
+              <span
+                aria-hidden
+                className="grid h-9 w-9 place-items-center overflow-hidden rounded-xl bg-ink text-cream shadow-sm"
+              >
+                <Image
+                  src="/nohouse.png"
+                  alt=""
+                  width="36"
+                  height="36"
+                  className="h-9 w-9 object-cover"
+                  priority
+                />
+              </span>
+              <span className="text-lg">
+                <span className="text-coral">$</span>nohouse
+              </span>
             </a>
-            <a href="#donations" className="hover:text-ink">
-              Donations
+            <nav className="hidden items-center gap-8 text-sm font-medium text-ink-soft md:flex">
+              <a href="#mission" className="hover:text-ink">
+                Mission
+              </a>
+              <a href="#donations" className="hover:text-ink">
+                Donations
+              </a>
+              <a href="#how" className="hover:text-ink">
+                How it works
+              </a>
+              <a href="#projects" className="hover:text-ink">
+                Projects
+              </a>
+              <a href="#token" className="hover:text-ink">
+                Token
+              </a>
+            </nav>
+          </div>
+          <div className="flex items-center gap-3">
+            <a
+              href={PUMPFUN_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="pulse-glow inline-flex h-10 items-center justify-center rounded-full bg-ink px-4 text-sm font-semibold text-cream transition hover:bg-ember"
+            >
+              Buy $nohouse
             </a>
-            <a href="#how" className="hover:text-ink">
-              How it works
+            <a
+              href={X_ACCOUNT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Follow @nohousecoin on X"
+              className="hidden h-10 w-10 items-center justify-center rounded-full border border-ink/15 bg-white/70 text-ink backdrop-blur transition hover:-translate-y-0.5 hover:bg-ink hover:text-cream md:inline-flex"
+            >
+              <XIcon className="h-4 w-4" />
             </a>
-            <a href="#projects" className="hover:text-ink">
-              Projects
+            <a
+              href={X_COMMUNITY_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Join the $nohouse community on X"
+              className="group hidden h-10 items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/70 px-4 text-sm font-semibold text-ink backdrop-blur transition hover:-translate-y-0.5 hover:bg-white md:inline-flex"
+            >
+              <XIcon className="h-4 w-4" />
+              <span>Community</span>
             </a>
-            <a href="#token" className="hover:text-ink">
-              Token
-            </a>
-          </nav>
-          <a
-            href={PUMPFUN_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="pulse-glow inline-flex h-10 items-center justify-center rounded-full bg-ink px-4 text-sm font-semibold text-cream transition hover:bg-ember"
-          >
-            Buy $nohouse
-          </a>
-          <a
-            href={X_COMMUNITY_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Join the $nohouse community on X"
-            className="group ml-3 inline-flex h-10 items-center justify-center gap-2 rounded-full border border-ink/15 bg-white/70 px-4 text-sm font-semibold text-ink backdrop-blur transition hover:-translate-y-0.5 hover:bg-white"
-          >
-            <XIcon className="h-4 w-4" />
-            <span className="hidden sm:inline">Community</span>
-          </a>
+            <MobileNav
+              pumpfunUrl={PUMPFUN_URL}
+              xAccountUrl={X_ACCOUNT_URL}
+              xCommunityUrl={X_COMMUNITY_URL}
+            />
+          </div>
         </header>
 
         {/* Hero */}
@@ -553,6 +573,15 @@ export default async function Home() {
                 className="hover:text-ink"
               >
                 donate.gg
+              </a>
+              <a
+                href={X_ACCOUNT_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 hover:text-ink"
+              >
+                <XIcon className="h-3.5 w-3.5" />
+                @nohousecoin
               </a>
               <a
                 href={X_COMMUNITY_URL}
